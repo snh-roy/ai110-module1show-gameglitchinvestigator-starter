@@ -25,13 +25,19 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+This project is a simple number-guessing game built with Streamlit where the player chooses a difficulty and attempts to guess a secret number within a constrained range.
+
+Bugs found: inverted hint logic (hints told players to go higher when their guess was already higher), instruction text not reflecting the selected difficulty range, scoring that sometimes increased on wrong guesses, and a type mismatch that could break comparisons.
+
+Fixes applied: corrected the hint comparisons and messages in `logic_utils.check_guess`, fixed scoring to consistently deduct points for incorrect guesses, ensured the new game reset uses the selected difficulty range, removed any secret-type flipping, and added focused pytest tests in `tests/test_game_logic.py` to prevent regressions.
+
+Verification: ran `pytest` (8 passed) and manually played the app with `streamlit run app.py` to confirm stable secret numbers, correct hints, and expected scoring. See `reflection.md` for a detailed account of AI-assisted debugging.
 
 ## 📸 Demo
 
-- [ ] [Insert a screenshot of your fixed, winning game here]
+- Run the app locally: `pip install -r requirements.txt && streamlit run app.py`
+- Automated tests: run `pytest` (the suite reports `8 passed`).
+- Screenshot: Add a screenshot of the fixed game UI here (or view the app at http://localhost:8501 when running locally).
 
 ## 🚀 Stretch Features
 

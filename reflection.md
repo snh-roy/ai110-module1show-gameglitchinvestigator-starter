@@ -47,14 +47,25 @@ The game initially appeared functional, but several logical glitches made it con
 ## 4. What did you learn about Streamlit and state?
 
 - In your own words, explain why the secret number kept changing in the original app.
+  - Streamlit re-executes the script top-to-bottom on every user interaction (a "rerun"), so values assigned to ordinary variables are reset unless stored in `st.session_state`. The original code either re-assigned or converted the secret on some interactions, so the secret appeared to change unexpectedly.
+
 - How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
+  - A Streamlit app reruns its script whenever a widget changes. To persist values across those reruns (like a secret number or counters), you store them in `st.session_state`, which survives reruns until you explicitly change it.
+
 - What change did you make that finally gave the game a stable secret number?
+  - The fix was to initialize the secret only when it wasn't present in session state:
+    `if "secret" not in st.session_state: st.session_state.secret = random.randint(low, high)`
+  - This ensures the secret is generated once per game and remains stable across button clicks and reruns.
 
 ---
 
 ## 5. Looking ahead: your developer habits
 
 - What is one habit or strategy from this project that you want to reuse in future labs or projects?
-  - This could be a testing habit, a prompting strategy, or a way you used Git.
+  - Write small, focused tests early (TDD-style) for any behavioral change. Tests made it fast to validate fixes and to catch regressions introduced by AI-suggested edits.
+
 - What is one thing you would do differently next time you work with AI on a coding task?
+  - Validate AI suggestions with minimal, automated tests before accepting changes into the codebase; treat AI output as a draft that requires verification rather than a final answer.
+
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
+  - AI is a powerful assistant for finding likely issues and suggesting concise changes, but human judgement and tests are essential. The best workflow pairs AI suggestions with unit tests and small, iterative commits.

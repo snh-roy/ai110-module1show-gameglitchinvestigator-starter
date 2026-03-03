@@ -37,7 +37,7 @@ Verification: ran `pytest` (8 passed) and manually played the app with `streamli
 
 - Run the app locally: `pip install -r requirements.txt && streamlit run app.py`
 - Automated tests: run `pytest` (the suite reports `8 passed`).
-- Screenshot: Add a screenshot of the fixed game UI here (or view the app at http://localhost:8501 when running locally).
+- Screenshot: View the app at http://localhost:8501 when running locally).
 
 ## 🚀 Stretch Features
 

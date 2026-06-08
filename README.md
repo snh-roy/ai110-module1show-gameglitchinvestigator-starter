@@ -1,3 +1,4 @@
+# readme.md: project overview, setup instructions, and mission details for the game glitch investigator.
 # 🎮 Game Glitch Investigator: The Impossible Guesser
 
 ## 🚨 The Situation
@@ -38,6 +39,10 @@ Verification: ran `pytest` (8 passed) and manually played the app with `streamli
 - Run the app locally: `pip install -r requirements.txt && streamlit run app.py`
 - Automated tests: run `pytest` (the suite reports `8 passed`).
 - Screenshot: View the app at http://localhost:8501 when running locally).
+
+## 🤖 AI Interactions
+
+For a detailed log of AI agent workflows, test generation, and model comparisons, see [ai_interactions.md](./ai_interactions.md).
 
 ## 🚀 Stretch Features
 

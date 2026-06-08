@@ -1,3 +1,4 @@
+# test_game_logic.py: unit tests to verify the accuracy of the game's logical utilities.
 import os
 import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -40,7 +41,14 @@ def test_update_score_wrong():
     new_score = update_score(10, "Too High", 1)
     assert new_score == 5
 
+def test_update_score_no_negative():
+    # fix: ensures the score never drops below zero when subtracting points.
+    new_score = update_score(0, "Too High", 1)
+    assert new_score == 0
+
 def test_difficulty_ranges():
     assert get_range_for_difficulty("Easy") == (1, 20)
     assert get_range_for_difficulty("Normal") == (1, 100)
-    assert get_range_for_difficulty("Hard") == (1, 50)
+    # fix: verifies that hard difficulty has a significantly larger range than normal.
+    low, high = get_range_for_difficulty("Hard")
+    assert high > 100 

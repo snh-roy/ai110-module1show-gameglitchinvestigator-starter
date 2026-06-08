@@ -1,3 +1,4 @@
+# logic_utils.py: provides core game functions for difficulty scaling, parsing, and scoring.
 def get_range_for_difficulty(difficulty: str):
     """Return (low, high) inclusive range for a given difficulty."""
     if difficulty == "Easy":
@@ -5,7 +6,7 @@ def get_range_for_difficulty(difficulty: str):
     if difficulty == "Normal":
         return 1, 100
     if difficulty == "Hard":
-        return 1, 50
+        return 1, 200
     return 1, 100
 
 
@@ -47,8 +48,10 @@ def update_score(current_score: int, outcome: str, attempt_number: int):
         points = 100 - 10 * attempt_number
         return current_score + max(points, 10)
 
-    # FIX: Corrected scoring logic to consistently subtract points for wrong guesses  # Collaboration: used Copilot suggestion; verified behavior with tests
+    # fix: ensures the score never drops below zero when subtracting points for wrong guesses.
     if outcome in ["Too High", "Too Low"]:
-        return current_score - 5
+        return max(0, current_score - 5)
+
+    return current_score
 
     return current_score

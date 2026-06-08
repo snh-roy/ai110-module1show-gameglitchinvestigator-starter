@@ -1,3 +1,4 @@
+# app.py: manages the streamlit interface, game state, and user interactions for the guessing game.
 import random
 import streamlit as st
 from logic_utils import (
@@ -19,6 +20,21 @@ difficulty = st.sidebar.selectbox(
     ["Easy", "Normal", "Hard"],
     index=1,
 )
+
+# FIX: Automatically reset game if difficulty changes  # Collaboration: paired with Copilot to identify state desync; verified by switching difficulties in-app
+if "current_difficulty" not in st.session_state:
+    st.session_state.current_difficulty = difficulty
+
+if st.session_state.current_difficulty != difficulty:
+    st.session_state.current_difficulty = difficulty
+    st.session_state.attempts = 1
+    # Use the new range immediately
+    low, high = get_range_for_difficulty(difficulty)
+    st.session_state.secret = random.randint(low, high)
+    st.session_state.score = 0
+    st.session_state.status = "playing"
+    st.session_state.history = []
+    st.rerun()
 
 attempt_limit_map = {
     "Easy": 6,
@@ -77,7 +93,7 @@ with col3:
 
 if new_game:
     st.session_state.attempts = 1
-    # FIX: New game now correctly uses the difficulty range  # Collaboration: Copilot suggested using difficulty bounds; tested by starting new games on each difficulty
+    # fix: ensures a new secret is generated within the correct range when restarting.
     st.session_state.secret = random.randint(low, high)
     st.session_state.score = 0
     st.session_state.status = "playing"
@@ -133,3 +149,4 @@ if submit:
 
 st.divider()
 st.caption("Refactored and fixed using AI as a teammate.")
+eammate.")

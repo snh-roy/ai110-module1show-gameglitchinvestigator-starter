@@ -1,4 +1,3 @@
-# readme.md: project overview, setup instructions, and mission details for the game glitch investigator.
 # 🎮 Game Glitch Investigator: The Impossible Guesser
 
 ## 🚨 The Situation
